@@ -1,5 +1,7 @@
 package com.pit.hotspot;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,9 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +30,27 @@ public class MainActivity extends AppCompatActivity {
     public TextView TxwStatus;
     public Button butRefresh;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //case R.id.add:
+        if (item.getItemId() == R.id.exit) {
+            onDestroy();
+            finish();
+            return (true);
+        }
+        return(super.onOptionsItemSelected(item));
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "MainActivity:onDestroy");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
         boolean connection = ApManager.testInternetConnection(context);
         if (connection) {
-
             changeStatus();
-
         } else {
-            TxwStatus.setText("No internet connection");
-            text = "No internet connection";
-            toast = Toast.makeText(context, text, duration);
+            TxwStatus.setText(R.string.no_internet);
+            toast = Toast.makeText(context, R.string.no_internet, duration);
             toast.show();
         }
         butRefresh.setOnClickListener(view -> changeStatus());
@@ -63,23 +86,24 @@ public class MainActivity extends AppCompatActivity {
         if (change) {
             if (status) {
                 showStatus(false,"Set to ");
-                TxwStatus.setText("Hotspot is inactive");
+                TxwStatus.setText(R.string.hs_off);
             } else {
                 showStatus(true,"Set to ");
-                TxwStatus.setText("Hotspot is active");
+
+                TxwStatus.setText(R.string.hs_on);
             }
         } else {
-            text = "It was not possible to operate on the Hotspot. Check permissions";
-            toast = Toast.makeText(context, text, duration);
+            toast = Toast.makeText(context, R.string.hs_no_operate, duration);
             toast.show();
         }
 
     }
-    private void showStatus(boolean status,CharSequence addText) {
+    private void showStatus(boolean status, String addText) {
+        String text;
         if (status) {
-            text = addText+"Hotspot active";
+            text = addText + getResources().getString(R.string.status_hs_on);
         } else {
-            text = addText+"Hotspot inactive";
+            text = addText + getResources().getString(R.string.status_hs_off);
         }
         toast = Toast.makeText(context, text, duration);
         toast.show();

@@ -10,13 +10,13 @@
 
 
     <TextView
+        android:id="@+id/title"
+        android:text="@string/title"
         android:background="@color/white"
         android:textColor="@color/black"
-        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
-        android:text="Hotspot wi-fi setting"
         android:textSize="27sp"
         android:padding="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,13 +28,13 @@
 
 
     <TextView
+        android:id="@+id/status"
+        android:text="@string/status"
         android:background="@color/white"
         android:textColor="@color/blue"
-        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
-        android:text="Hotspot Status"
         android:textStyle="bold"
         android:textSize="25sp"
         android:padding="10sp"
@@ -47,9 +47,9 @@
 
     <Button
         android:id="@+id/butRefresh"
+        android:text="@string/butRefresh"
         android:layout_width="204dp"
         android:layout_height="83dp"
-        android:text="Refresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
