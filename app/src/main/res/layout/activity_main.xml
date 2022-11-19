@@ -8,17 +8,19 @@
     android:background="@color/black">
 
 
-
     <TextView
         android:id="@+id/title"
-        android:text="@string/title"
-        android:background="@color/white"
-        android:textColor="@color/black"
+        android:background="@drawable/txt_bg_rounded"
+        android:textColor="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:fontFamily="monospace"
-        android:textSize="27sp"
+        android:textStyle="bold"
         android:padding="10sp"
+        android:text="@string/title"
+
+        android:textSize="27sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -29,9 +31,10 @@
 
     <TextView
         android:id="@+id/status"
-        android:text="@string/status"
-        android:background="@color/white"
+        android:background="@drawable/txt_bg_rounded"
         android:textColor="@color/blue"
+        android:text="@string/status"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
@@ -47,6 +50,7 @@
 
     <Button
         android:id="@+id/butRefresh"
+        android:background="@drawable/but_bg_rounded"
         android:text="@string/butRefresh"
         android:layout_width="204dp"
         android:layout_height="83dp"
