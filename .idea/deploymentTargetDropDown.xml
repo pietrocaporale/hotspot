@@ -6,12 +6,12 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\pit.intelSun.000\.android\avd\MYA-L11_API_23.avd" />
+            <type value="SERIAL_NUMBER" />
+            <value value="E8RBB17B13155175" />
           </Key>
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-11-19T19:51:41.001577700Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-11-19T20:44:28.819800800Z" />
   </component>
 </project>
