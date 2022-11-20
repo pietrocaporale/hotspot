@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">Hotspot</string>
-    <string name="title">Setting</string>
     <string name="status">Hotspot Status</string>
-    <string name="butRefresh">Refresh</string>
     <string name="m_exit">Exit</string>
-
     <string name="no_internet">No internet connection</string>
-    <string name="hs_off">Hotspot turned off</string>
-    <string name="hs_on">Hotspot turned on</string>
+    <string name="hs_off">off</string>
+    <string name="hs_on">on</string>
     <string name="hs_no_operate">It was not possible to operate on the Hotspot. Check permissions!</string>
-    <string name="status_hs_off">Hotspot inactive</string>
-    <string name="status_hs_on">Hotspot active</string>
-
+    <string name="status_hs_off">deactivated</string>
+    <string name="status_hs_on">activated</string>
+    <string name="but_des_on">on button</string>
+    <string name="but_des_off">off button</string>
 </resources>
