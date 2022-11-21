@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton butGreen;
     public ImageButton butRed;
 
+    public boolean status;
+    public boolean connection;
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -78,43 +82,52 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
-
-        boolean connection = ApManager.testInternetConnection(context);
-        if (connection) {
-            changeStatus();
-        } else {
-            TxwStatus.setText(R.string.no_internet);
-            toast = Toast.makeText(context, R.string.no_internet, duration);
-            toast.show();
-        }
         butGreen.setOnClickListener(view -> changeStatus());
         butRed.setOnClickListener(view -> changeStatus());
 
+        connection = ApManager.testInternetConnection(context);
+        status = ApManager.isApOn(MainActivity.this);
+        if (!connection) {
+            if (status) {
+                status=changeStatus();
+                toast = Toast.makeText(context, R.string.no_internet_set_off, duration);
+                toast.show();
+            }
+        }
+        showStatus(status);
     }
-    private void changeStatus() {
+
+    private boolean changeStatus() {
         boolean status = ApManager.isApOn(MainActivity.this);
-        showStatus(status,"");
+        boolean newstatus=false;
         boolean change = ApManager.configApState(MainActivity.this);
         if (change) {
             if (status) {
-                showStatus(false,"Hotspot ");
+                showStatus(newstatus);
                 TxwStatus.setText(R.string.hs_off);
             } else {
-                showStatus(true,"Hotspot ");
-                TxwStatus.setText(R.string.hs_on);
+                if (connection) {
+                    newstatus=true;
+                    showStatus(newstatus);
+                    TxwStatus.setText(R.string.hs_on);
+                }else {
+                    toast = Toast.makeText(context, R.string.no_internet, duration);
+                    toast.show();
+                }
             }
         } else {
             toast = Toast.makeText(context, R.string.hs_no_operate, duration);
             toast.show();
         }
-
+        return newstatus;
     }
-    private void showStatus(boolean status, String addText) {
-        String text;
+    private void showStatus(boolean status) {
+        //String text="";
         int backgroundColor;
         int textColor;
         if (status) {
-            text = addText + getResources().getString(R.string.status_hs_on);
+            //text = addText + getResources().getString(R.string.status_hs_on);
+            TxwStatus.setText(getResources().getString(R.string.hs_on));
             backgroundColor = ContextCompat.getColor(context, green);
             textColor = ContextCompat.getColor(context, white);
             TxwStatus.setTextColor(textColor);
@@ -122,17 +135,14 @@ public class MainActivity extends AppCompatActivity {
             butRed.setVisibility(View.INVISIBLE);
             butGreen.setVisibility(View.VISIBLE);
         } else {
-            text = addText + getResources().getString(R.string.status_hs_off);
+            //text = addText + getResources().getString(R.string.status_hs_off);
+            TxwStatus.setText(getResources().getString(R.string.hs_off));
             backgroundColor = ContextCompat.getColor(context, red);
             textColor = ContextCompat.getColor(context, white);
             TxwStatus.setTextColor(textColor);
             TxwStatus.setBackgroundColor(backgroundColor);
             butGreen.setVisibility(View.INVISIBLE);
             butRed.setVisibility(View.VISIBLE);
-        }
-        if ( !addText.equals("")) {
-            toast = Toast.makeText(context, text, duration);
-            toast.show();
         }
     }
 
